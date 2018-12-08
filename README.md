@@ -33,28 +33,38 @@ GTX 1080 + i5-7500
 
 3、	模型训练过程
 开始的时候，我们使用的模型是VGG16进行对图片的特征的提取，去掉VGG16 的最后两层，加上一个最大池化和一个全连接层，回归输出关键点的位置以及分类输出可见性。
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/1.png)
+
 上述的模型对于图像中的背景的影响较为明显，对于在不使用包围盒的情况下的效果并不理想，于是我们采用了STN网络（Spatial Transformer Networks），这个网络的好处是能够使模型能够自己注意到关键检测的目标点的位置，并且这种网络不需要额外的监督，并且不会明显影响网络的运算速度，于是，我们首先使用预训练的Resnet18对处理过的图像进行特征提取，然后使用一个空间变换网络STN在之后并联四个STN用来消除背景的干扰，之后使用全连接层进行对关键点的 可见性以及关键点的位置进行预测。
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/2.png)
+
 loss function：
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/3.png)
 
 4、	模型训练结果
 4.1模型训练数据
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/4.png)
 
 table1：对比各种模型在Consumer-to-shop_Clothes_Retrieval_Benchmark数据集上的效果，主要采PDL指标进行衡量
 
 下图为Consumer-to-shop_Clothes_Retrieval_Benchmark 数据集上检测4个关键点任务中采用VGG6、ResNet18、ResNet34、ResNet34+Dropout正则化以及ResNet+dropout+SPP五种网络结构之间的关键点检测率PDL的对比，其中SPP（空间金字塔池化）中的池化为最大池化，用于替代从最后一个卷积层到第一个全连接层之间的池化层。可以看出随着模型的复杂程度不断地增加， 最终的准确率不断的提升，其中ResNet34+Dropout在最后取得了最高的准确率。其中ResNet34+Dropout+SPP的效果不太理想可能是因为采用了最大池化层以及只选用了1*1,2*2,3*3,4*4的输出尺寸，相比于ResNet34最后一层的7*7的平均池化较为不佳，关于在第一层全连接层之前采用较大尺寸的平均池化可以取得较好的效果也有许多的研究。
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/5.png)
 
 由于之前采用的Consumer-to-shop_Clothes_Retrieval_Benchmark 数据集主要用于卖家与买家的图像检索匹配任务，因此以下的实验我们采用了Fashion Landmark Detection Benchmark数据集进行后续的实验。在之前的实验中我们将BoundingBox作为一个已知的量进行模型的训练，即训练和预测模型的效果的图片都是通过BoundingBox裁剪所得到的，这样会导致需要人为地标注BoundingBox才能利用模型进行预测，这样会导致模型的实际应用价值大打折扣。而在下面Fashion Landmark Detection Benchmark数据集上我们不再利用BoundingBox作为已知条件，以此来增加模型的实用性。
 
 表2为我们的实验结果，其中STN分为参数共享和并行两种结构。
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/6.png)
+
 table2：对比各种模型在Fashion Landmark Detection Benchmark数据集上的效果，主要采用PDL指标进行衡量
 
 下图为采用ResNet18+4个共享权重的STN下模型训练过程中测试集的PDL以及NE.
+
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/7.png)
 
 4.2 部分图片效果展示
