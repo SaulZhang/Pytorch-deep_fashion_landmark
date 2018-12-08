@@ -85,7 +85,9 @@ table2：对比各种模型在Fashion Landmark Detection Benchmark数据集上�
 
 REFERENCE:
 [1] Sijie Yan,Ziwei Liu,Ping Luo,Shi Qiu,Xiaogang Wang,Xiaoou Tang.2017.Unconstrained Fashion Landmark Detection via Hierarchical Recurrent Transformer Networks .
+
 [2] Ziwei Liu,Sijie Yan,Ping Luo,Xiaogang Wang, Xiaoou Tang.2016.Fashion Landmark Detection in the Wild.
+
 [3] Max Jaderberg,Karen Simonyan,Andrew Zisserman,Koray Kavukcuoglu.2016.Spatial Transformer Networks.
 
 
