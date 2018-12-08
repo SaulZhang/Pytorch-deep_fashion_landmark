@@ -72,11 +72,16 @@ table2：对比各种模型在Fashion Landmark Detection Benchmark数据集上�
 以下为Consumer-to-shop_Clothes_Retrieval_Benchmark数据集4、 6和8个点的部分图片预测效果展示。   
 ![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/8.png)
 
+以下为Fashion Landmark Detection Benchmark数据集4、 6和8个点的部分图片预测效果展示。
+![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/9.png)
+
 5、	实习总结：         
 
 问题总结：虽然我们收获很多，但我们遇到的问题也不少。比如我们在利用ResNet18+STN+SPP在Fashion Landmark Detection Benchmark数据集上训练8个关键点的检测中，当模型训练到了第20个epoch之后，所有的图片预测输出的点都固定在了一个位置（如下图），PDL准确率直接从0.74降到了0.15。STN的训练过程不够稳定，在我们的多次实验当中都出现了预测的点固定住的问题，之前参考论文中的方法采用了膨胀卷积之后也出现过类似的现象。这个问题也困扰了我们很久，至今还未解决。
 
-![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/8.png)
+![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/10.png)
+
+![image](https://github.com/SaulZhang/deep_fashion_landmark/blob/master/images/11.png)
 
 REFERENCE:
 [1] Sijie Yan,Ziwei Liu,Ping Luo,Shi Qiu,Xiaogang Wang,Xiaoou Tang.2017.Unconstrained Fashion Landmark Detection via Hierarchical Recurrent Transformer Networks .
